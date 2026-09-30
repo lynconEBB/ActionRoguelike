@@ -1,0 +1,26 @@
+[
+	{
+		"file": "D:/Unreal/ActionRoguelike/Intermediate/Build/Win64/x64/UnrealEditor/Development/ActionRoguelike/Module.ActionRoguelike.gen.cpp",
+		"command": "\"C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/Llvm/x64/bin/clang-cl.exe\" @\"D:/Unreal/ActionRoguelike/Intermediate/Build/Win64/x64/UnrealEditor/Development/ActionRoguelike/Module.ActionRoguelike.gen.cpp.obj.rsp\" ",
+		"directory": "C:/Program Files/Epic Games/UE_5.8/Engine/Source",
+		"output": "D:/Unreal/ActionRoguelike/Intermediate/Build/Win64/x64/UnrealEditor/Development/ActionRoguelike/Module.ActionRoguelike.gen.cpp.obj"
+	},
+	{
+		"file": "D:/Unreal/ActionRoguelike/Intermediate/Build/Win64/x64/UnrealEditor/Development/ActionRoguelike/PerModuleInline.gen.cpp",
+		"command": "\"C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/Llvm/x64/bin/clang-cl.exe\" @\"D:/Unreal/ActionRoguelike/Intermediate/Build/Win64/x64/UnrealEditor/Development/ActionRoguelike/PerModuleInline.gen.cpp.obj.rsp\" ",
+		"directory": "C:/Program Files/Epic Games/UE_5.8/Engine/Source",
+		"output": "D:/Unreal/ActionRoguelike/Intermediate/Build/Win64/x64/UnrealEditor/Development/ActionRoguelike/PerModuleInline.gen.cpp.obj"
+	},
+	{
+		"file": "D:/Unreal/ActionRoguelike/Source/ActionRoguelike/ActionRoguelike.cpp",
+		"command": "\"C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/Llvm/x64/bin/clang-cl.exe\" @\"D:/Unreal/ActionRoguelike/Intermediate/Build/Win64/x64/UnrealEditor/Development/ActionRoguelike/ActionRoguelike.cpp.obj.rsp\" ",
+		"directory": "C:/Program Files/Epic Games/UE_5.8/Engine/Source",
+		"output": "D:/Unreal/ActionRoguelike/Intermediate/Build/Win64/x64/UnrealEditor/Development/ActionRoguelike/ActionRoguelike.cpp.obj"
+	},
+	{
+		"file": "D:/Unreal/ActionRoguelike/Source/ActionRoguelike/RogueCharacter.cpp",
+		"command": "\"C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/Llvm/x64/bin/clang-cl.exe\" @\"D:/Unreal/ActionRoguelike/Intermediate/Build/Win64/x64/UnrealEditor/Development/ActionRoguelike/RogueCharacter.cpp.obj.rsp\" ",
+		"directory": "C:/Program Files/Epic Games/UE_5.8/Engine/Source",
+		"output": "D:/Unreal/ActionRoguelike/Intermediate/Build/Win64/x64/UnrealEditor/Development/ActionRoguelike/RogueCharacter.cpp.obj"
+	}
+]
