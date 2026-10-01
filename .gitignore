@@ -76,3 +76,10 @@ DerivedDataCache/*
 .ignore
 .idea
 .vscode
+
+ActionRoguelike.code-workspace
+ActionRoguelike.sln
+ActionRoguelike.uproject.DotSettings.user
+Automation_ActionRoguelike.sln
+Makefile
+compile_commands.json
