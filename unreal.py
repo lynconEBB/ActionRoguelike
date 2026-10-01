@@ -4,7 +4,8 @@ import sys
 from pathlib import Path
 
 is_linux = sys.platform == "linux"
-unreal_dir = Path(os.environ.get("UE_DIR", "C:/Program Files/Epic Games/UE_5.8"))
+default_unreal_dir = "/opt/unreal-engine" if is_linux else "C:/Program Files/Epic Games/UE_5.8"
+unreal_dir = Path(os.environ.get("UE_DIR", default_unreal_dir))
 
 if (is_linux):
     build_script = unreal_dir / "Engine/Build/BatchFiles/Linux/Build.sh"
@@ -51,6 +52,14 @@ def build(arguments):
 def editor(arguments):
     environment = os.environ.copy()
     if (is_linux):
+        adb = (
+            Path(environment.get("ANDROID_HOME", Path.home() / "Android/Sdk"))
+            / "platform-tools/adb"
+        )
+        adb_environment = environment.copy()
+        adb_environment.pop("ADB_SERVER_SOCKET", None)
+        subprocess.run([adb, "start-server"], check=True, env=adb_environment)
+
         for variable in (
             "QT_SCALE_FACTOR",
             "QT_AUTO_SCREEN_SCALE_FACTOR",
@@ -63,6 +72,7 @@ def editor(arguments):
                 "SDL_VIDEODRIVER": "x11",
                 "GDK_BACKEND": "x11",
                 "QT_QPA_PLATFORM": "xcb",
+                "ADB_SERVER_SOCKET": "tcp:127.0.0.1:5037",
             }
         )
 

@@ -1,29 +1,62 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
+#include "NiagaraSystem.h"
 #include "GameFramework/Character.h"
+#include "UObject/ObjectPtr.h"
 #include "RogueCharacter.generated.h"
 
+class ARogueProjectileMagic;
+struct FInputActionValue;
+class UInputAction;
+class UCameraComponent;
+class USpringArmComponent;
+class UAnimMontage;
+class UNiagaraSystem;
+
 UCLASS()
-class ACTIONROGUELIKE_API ARogueCharacter : public ACharacter
-{
-	GENERATED_BODY()
+class ACTIONROGUELIKE_API ARogueCharacter : public ACharacter {
+    GENERATED_BODY()
 
 public:
-	// Sets default values for this character's properties
-	ARogueCharacter();
+    ARogueCharacter();
 
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
+    UPROPERTY(EditDefaultsOnly, Category="PrimaryAttack")
+    TObjectPtr<UAnimMontage> AttackMontage;
+    
+    UPROPERTY(EditDefaultsOnly, Category="PrimaryAttack")
+    TSubclassOf<ARogueProjectileMagic> ProjectileClass;
+    
+    UPROPERTY(EditDefaultsOnly, Category="PrimaryAttack")
+    TObjectPtr<UNiagaraSystem> CastingEffect;
+    
+    UPROPERTY(VisibleAnywhere, Category="PrimaryAttack")
+    FName MuzzleSocketName;
+    
+    UPROPERTY(EditDefaultsOnly, Category="Input")
+    TObjectPtr<UInputAction> Input_Move;
 
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+    UPROPERTY(EditDefaultsOnly, Category="Input")
+    TObjectPtr<UInputAction> Input_Look;
+    
+    UPROPERTY(EditDefaultsOnly, Category="Input")
+    TObjectPtr<UInputAction> Input_PrimaryAttack;
 
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+    UPROPERTY(VisibleAnywhere, Category="Components")
+    TObjectPtr<UCameraComponent> CameraComponent;
 
+    
+    
+
+    virtual void BeginPlay() override;
+    
+    void Move(const FInputActionValue& InValue);
+    void Look(const FInputActionValue& InValue);
+    void PrimaryAttack();
+    
+public:
+    virtual void Tick(float DeltaTime) override;
+
+    virtual void SetupPlayerInputComponent(class UInputComponent *PlayerInputComponent) override;
 };

@@ -1,5 +1,3 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
-
 using UnrealBuildTool;
 
 public class ActionRoguelike : ModuleRules
@@ -10,7 +8,7 @@ public class ActionRoguelike : ModuleRules
 
         PublicDependencyModuleNames.AddRange(["Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput"]);
 
-        PrivateDependencyModuleNames.AddRange([]);
+        PrivateDependencyModuleNames.AddRange([ "EnhancedInput", "Niagara"]);
 
         // Uncomment if you are using Slate UI
         // PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
