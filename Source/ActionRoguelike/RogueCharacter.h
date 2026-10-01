@@ -23,31 +23,29 @@ public:
 
 protected:
     UPROPERTY(EditDefaultsOnly, Category="PrimaryAttack")
+    TObjectPtr<USoundBase> CastingSound;
+    UPROPERTY(EditDefaultsOnly, Category="PrimaryAttack")
     TObjectPtr<UAnimMontage> AttackMontage;
-    
     UPROPERTY(EditDefaultsOnly, Category="PrimaryAttack")
     TSubclassOf<ARogueProjectileMagic> ProjectileClass;
-    
     UPROPERTY(EditDefaultsOnly, Category="PrimaryAttack")
     TObjectPtr<UNiagaraSystem> CastingEffect;
-    
     UPROPERTY(VisibleAnywhere, Category="PrimaryAttack")
     FName MuzzleSocketName;
     
     UPROPERTY(EditDefaultsOnly, Category="Input")
     TObjectPtr<UInputAction> Input_Move;
-
     UPROPERTY(EditDefaultsOnly, Category="Input")
     TObjectPtr<UInputAction> Input_Look;
-    
     UPROPERTY(EditDefaultsOnly, Category="Input")
     TObjectPtr<UInputAction> Input_PrimaryAttack;
+    UPROPERTY(EditDefaultsOnly, Category="Input")
+    TObjectPtr<UInputAction> Input_Jump;
 
     UPROPERTY(VisibleAnywhere, Category="Components")
     TObjectPtr<UCameraComponent> CameraComponent;
-
-    
-    
+    UPROPERTY(VisibleAnywhere, Category="Components")
+    TObjectPtr<USpringArmComponent> SpringArmComponent;
 
     virtual void BeginPlay() override;
     

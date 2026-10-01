@@ -6,6 +6,7 @@
 #include "InputActionValue.h"
 #include "InputTriggers.h"
 #include "NiagaraFunctionLibrary.h"
+#include "Kismet/GameplayStatics.h"
 
 ARogueCharacter::ARogueCharacter()
 {
@@ -38,8 +39,8 @@ void ARogueCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 
     EnhancedInput->BindAction(Input_Move, ETriggerEvent::Triggered, this, &ARogueCharacter::Move);
     EnhancedInput->BindAction(Input_Look, ETriggerEvent::Triggered, this, &ARogueCharacter::Look);
-	
     EnhancedInput->BindAction(Input_PrimaryAttack, ETriggerEvent::Triggered, this, &ARogueCharacter::PrimaryAttack);
+    EnhancedInput->BindAction(Input_Jump, ETriggerEvent::Triggered, this, &ARogueCharacter::Jump);
 }
 
 void ARogueCharacter::Move(const FInputActionValue& InValue)
@@ -78,7 +79,7 @@ void ARogueCharacter::PrimaryAttack()
 		EAttachLocation::Type::SnapToTarget, 
 		true);
 	
-	
+	UGameplayStatics::PlaySound2D(this, CastingSound);
 	
 	GetWorld()->GetTimerManager().SetTimer(AttackTimerHandle,[this]()
 	{
@@ -88,6 +89,7 @@ void ARogueCharacter::PrimaryAttack()
 		SpawnParams.Instigator = this;
 		SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 	
-		GetWorld()->SpawnActor<AActor>(ProjectileClass, SpawnLocation, SpawnRotation, SpawnParams);
+		AActor* Projectile = GetWorld()->SpawnActor<AActor>(ProjectileClass, SpawnLocation, SpawnRotation, SpawnParams);
+		MoveIgnoreActorAdd(Projectile);
 	},  AttackDelayTime, false);
 }
