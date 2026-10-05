@@ -1,5 +1,7 @@
 #include "RogueInteractionComponent.h"
 
+#include "RogueDataTypes.h"
+#include "Core/RogueInteractionInterface.h"
 #include "Engine/OverlapResult.h"
 
 
@@ -17,13 +19,11 @@ void URogueInteractionComponent::TickComponent(float DeltaTime, ELevelTick TickT
 	FVector Center = PC->GetPawn()->GetActorLocation();
 
 	TArray<FOverlapResult> Overlaps;
-	ECollisionChannel CollisionChannel = ECC_Visibility;
+	ECollisionChannel CollisionChannel = INTERACTION_COLLISION;
 	FCollisionShape Shape;
 	Shape.SetSphere(InteractionRadius);
 	
 	GetWorld()->OverlapMultiByChannel(Overlaps, Center, FQuat::Identity, CollisionChannel, Shape);
-	DrawDebugSphere(GetWorld(), Center, InteractionRadius, 32, FColor::White);
-	
 	FVector LookDirection = PC->GetControlRotation().Vector();
 	
 	AActor* BestActor = nullptr;
@@ -34,21 +34,31 @@ void URogueInteractionComponent::TickComponent(float DeltaTime, ELevelTick TickT
 		FVector OverlapLocation = Overlap.GetActor()->GetActorLocation();
 		FVector OverlapDirection = (OverlapLocation - Center).GetSafeNormal();
 		
-		DrawDebugBox(GetWorld(), OverlapLocation, FVector(50.0f), FColor::Red);
-		
 		float DotResult = FVector::DotProduct(OverlapDirection, LookDirection);
-		FString DebugString = FString::Printf(TEXT("Dot: %f"), DotResult);
-		DrawDebugString(GetWorld(),OverlapLocation, DebugString, nullptr, FColor::White, 0.0f, true);
-		
 		if (DotResult > HighestDotResult)
 		{
 			BestActor = Overlap.GetActor();
 			HighestDotResult = DotResult;
 		}
+		
+		DrawDebugBox(GetWorld(), OverlapLocation, FVector(50.0f), FColor::Red);
+		FString DebugString = FString::Printf(TEXT("Dot: %f"), DotResult);
+		DrawDebugString(GetWorld(),OverlapLocation, DebugString, nullptr, FColor::White, 0.0f, true);
 	}
 	
+	SelectedActor = BestActor;
 	if (BestActor)
 	{
 		DrawDebugBox(GetWorld(), BestActor->GetActorLocation(), FVector(50.0f), FColor::Green);
+	}
+	DrawDebugSphere(GetWorld(), Center, InteractionRadius, 32, FColor::White);
+}
+
+void URogueInteractionComponent::Interact()
+{
+	IRogueInteractionInterface* InteractInterface = Cast<IRogueInteractionInterface>(SelectedActor);
+	if (InteractInterface)
+	{
+		InteractInterface->Interact();
 	}
 }

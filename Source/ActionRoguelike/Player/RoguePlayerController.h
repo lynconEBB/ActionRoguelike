@@ -4,6 +4,7 @@
 #include "GameFramework/PlayerController.h"
 #include "RoguePlayerController.generated.h"
 
+class UInputAction;
 class URogueInteractionComponent;
 
 UCLASS()
@@ -17,4 +18,10 @@ public:
 protected:
 	UPROPERTY(EditDefaultsOnly, Category="Components")
 	TObjectPtr<URogueInteractionComponent> InteractionComponent;
+	
+	UPROPERTY(EditDefaultsOnly, Category="Input")
+	TObjectPtr<UInputAction> Input_Interact;
+
+	void OnInteraction();
+	virtual void SetupInputComponent() override;
 };

@@ -6,6 +6,7 @@ public class ActionRoguelike : ModuleRules
     {
         PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
+        PublicIncludePaths.AddRange(["ActionRoguelike"]);
         PublicDependencyModuleNames.AddRange(["Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput"]);
 
         PrivateDependencyModuleNames.AddRange([ "EnhancedInput", "Niagara"]);
