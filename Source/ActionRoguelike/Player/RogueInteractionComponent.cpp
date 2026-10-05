@@ -15,7 +15,6 @@ void URogueInteractionComponent::TickComponent(float DeltaTime, ELevelTick TickT
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	
 	APlayerController* PC = CastChecked<APlayerController>(GetOwner());
-	
 	FVector Center = PC->GetPawn()->GetActorLocation();
 
 	TArray<FOverlapResult> Overlaps;
@@ -56,9 +55,6 @@ void URogueInteractionComponent::TickComponent(float DeltaTime, ELevelTick TickT
 
 void URogueInteractionComponent::Interact()
 {
-	IRogueInteractionInterface* InteractInterface = Cast<IRogueInteractionInterface>(SelectedActor);
-	if (InteractInterface)
-	{
-		InteractInterface->Interact();
-	}
+	if (SelectedActor)
+		IRogueInteractionInterface::Execute_Interact(SelectedActor);
 }

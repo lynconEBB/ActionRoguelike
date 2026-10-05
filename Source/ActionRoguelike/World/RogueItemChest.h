@@ -26,7 +26,7 @@ public:
 	float AnimationSpeed = 50.f;
 
 	virtual void Tick(float DeltaTime) override;
-	virtual void Interact() override;	
+	virtual void Interact_Implementation() override;
 	
 	UFUNCTION(BlueprintImplementableEvent)
 	void AnimationDone();	
